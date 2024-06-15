@@ -26,3 +26,4 @@ This is a data analysis practice project on how to clean and prepare data using 
 |ed hambribe|38|divorced|ehambribei@china.com.cn|770-167-4852|04354 Graceland Junction,Marietta,Georgia|Community Outreach Specialist|6/18/2014|
 |geoffry bouette|33|married|gbouettej@live.com|361-160-6496|53 Knutson Way,Corpus Christi,Texas|Systems Administrator I|11/19/2014|
 
+## Copy the table
