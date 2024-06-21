@@ -6107,7 +6107,7 @@ UPDATE club_member_info_cleaned SET full_name = UPPER(full_name)
 |ALLIX LAWRIE|50|divorced|alawrierq@wsj.com|515-452-7385|162 Orin Way,Des Moines,Iowa|Nurse Practicioner|3/19/2021|
 |ROCKEY GIMBRETT|26|married|rgimbrettrr@google.ca|713-436-2805|77 Dorton Crossing,Houston,Texas|Account Executive|4/25/2015|
 
-## Delete rows with duplicate emails
+### Delete rows with duplicate emails
 
 ```sql
 DELETE FROM club_member_info_cleaned WHERE rowid IN
