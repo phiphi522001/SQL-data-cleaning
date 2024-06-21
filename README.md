@@ -6108,3 +6108,15 @@ UPDATE club_member_info_cleaned SET full_name = UPPER(full_name)
 |ROCKEY GIMBRETT|26|married|rgimbrettrr@google.ca|713-436-2805|77 Dorton Crossing,Houston,Texas|Account Executive|4/25/2015|
 
 ## Delete rows with duplicate emails
+
+```sql
+DELETE FROM club_member_info_cleaned WHERE rowid IN
+(
+SELECT cmic.rowid FROM club_member_info_cleaned cmic
+JOIN
+	(SELECT email, MIN(rowid) as min_id FROM club_member_info_cleaned 
+	 GROUP BY email) as sub
+ON cmic.email = sub.email
+WHERE cmic.rowid > sub.min_id
+)
+```
