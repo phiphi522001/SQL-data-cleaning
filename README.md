@@ -1,9 +1,49 @@
-# SQL-data-cleaning
-This is an educational project on data cleaning and preparation using SQL by Duy Phi. The original database in CSV format is located in the file club_member_info.csv. This project will use SQLite database management system and will be implemented in DBeaver. Here, we will explore the steps that need to be applied to obtain a cleansed version of the dataset.
+# SQL data cleaning
+This is an educational project on data cleaning and preparation using SQL by Duy Phi. The original database in CSV format is located in the file club_member_info.csv. This project will use SQLite database and will be implemented in DBeaver. Here, we will explore the steps that need to be applied to obtain a cleansed version of the dataset.
 
 ## Prepare a SQLite database to work
 
-Trong DBeaver, tạo một kết nối đến cơ sở dữ liệu mới 
+### Create a new database connection
+
+**Step 1: in DBeaver, to create a connection to a new database, right-click in the "Database Navigator" pane, select "Create → Connection".**
+
+<img src="https://github.com/user-attachments/assets/f714e78f-5364-4119-ac8a-6c460e12d862" width="350" height="400">
+
+**Step 2: select SQLite database as image below and click "Next".**
+
+<img src="https://github.com/user-attachments/assets/daaead2f-d60d-4123-ae79-b96ee5f86d14" width="350" height="400">
+
+**Step 3: click on "Create" button, the dialog box in the next image appears, select where to save the database file and name this new database "club_members.db" and click the "Save" button. In the next image, click the "Finish" button. Finally, a new database appears in the "Database Nagivator" pane.**
+
+<img src="https://github.com/user-attachments/assets/0b71d80f-bf4a-47ce-b6cd-1bffb40ab2d1" width="350" height="400">
+<img src="https://github.com/user-attachments/assets/5e22cdf0-295a-4d4f-bb41-c25e1771d97a" width=350 height=400>
+<img src="https://github.com/user-attachments/assets/b97d1cb9-fc62-4e35-9545-9dc818efa7bb" width=350 height=400>
+<img src="https://github.com/user-attachments/assets/53550b39-56b4-40a8-81f5-f6e957f880e2" width=350 height=400>
+
+### Import the CSV dataset into database
+
+**Step 1: expand the newly created database by double-clicking on its name, right-click on "Tables", select the "Import Data" option.**
+
+<img src="https://github.com/user-attachments/assets/65015155-8a89-4939-a0ab-1f57abb7ea3b" width=350 height=400>
+
+**Step 2: check that CSV option is chosen and click "Next".**
+
+<img src="https://github.com/user-attachments/assets/f1eed528-aed6-4c65-bd14-bb2b4d4dcad1" width=350 height=400>
+
+**Step 3: choose the dataset CSV file and click "Open", in the next 2 images click "Next". When "Proceed" button become active, click it and wait while importing will finish. In the last image, you have completed importing data from the CSV file into the database.**
+
+<img src="https://github.com/user-attachments/assets/1b8bd484-8254-4639-8591-ae653ad5d8b0" width=350 height=400>
+<img src="https://github.com/user-attachments/assets/d4019cec-a5ed-4b11-9387-92552a74ec20" width=350 height=400>
+<img src="https://github.com/user-attachments/assets/6ff3fee1-8237-47f6-841c-fac4c26f6f9e" width=350 height=400>
+<img src="https://github.com/user-attachments/assets/ef70e049-b7c3-4a37-8c53-e7a029174d95" width=350 height=400>
+<img src="https://github.com/user-attachments/assets/a210ece0-d482-4e2d-bcda-67393830c6f3" width=705 height=400>
+
+
+
+
+
+
+
 
 
 
