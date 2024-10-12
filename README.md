@@ -38,7 +38,7 @@ This is an educational project on data cleaning and preparation using SQL by Duy
 <img src="https://github.com/user-attachments/assets/ef70e049-b7c3-4a37-8c53-e7a029174d95" width=350 height=400>
 <img src="https://github.com/user-attachments/assets/a210ece0-d482-4e2d-bcda-67393830c6f3" width=705 height=400>
 
-## An overview of the dataset
+### An overview of the dataset
 First we need to display the first 10 records to get a quick look at the dataset by using following sql statement.
 ```sql
 SELECT * FROM club_member_info LIMIT 10
@@ -59,8 +59,7 @@ SELECT * FROM club_member_info LIMIT 10
 | fey kloss|52|married|fkloss9@godaddy.com|808-177-0318|8976 Jackson Park,Honolulu,Hawaii|Chemical Engineer|11/5/2014|
 
 ## Cleaning and documenting 
-### Copy the table
-#### Create a new table for cleaning
+### Make a copy of table
 
 ```sql
 CREATE TABLE club_member_info_cleaned (
@@ -74,7 +73,7 @@ CREATE TABLE club_member_info_cleaned (
 	membership_date VARCHAR(50)
 );
 ```
-### Copy all values from original table
+Copy all values from original table
 
 ```sql 
 INSERT INTO club_member_info_cleaned SELECT * FROM club_member_info
