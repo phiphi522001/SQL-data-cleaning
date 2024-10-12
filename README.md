@@ -79,27 +79,27 @@ Copy all values from original table
 INSERT INTO club_member_info_cleaned SELECT * FROM club_member_info
 ```
 
-## Data cleaning
+### Data cleaning
 
-### Adjust age greater than 100 to average age
+#### Adjust age greater than 100 to average age
 
 ```sql
 UPDATE club_member_info_cleaned SET age = 42 WHERE age > 100
 ```
 
-### Remove spaces at the beginning and end of each member's full name
+#### Remove spaces at the beginning and end of each member's full name
 
 ```sql
 UPDATE club_member_info_cleaned SET full_name = TRIM(full_name)
 ```
 
-### Capitalize all characters in the member's name
+#### Capitalize all characters in the member's name
 
 ```sql
 UPDATE club_member_info_cleaned SET full_name = UPPER(full_name)
 ```
 
-### Delete rows with duplicate emails
+#### Delete rows with duplicate emails
 
 ```sql
 DELETE FROM club_member_info_cleaned WHERE rowid IN
