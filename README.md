@@ -155,10 +155,21 @@ BEGIN
   )
   WHERE word != '';
 END;
+
+-- After completing the above sql statement, continue with the sql statement below.
+UPDATE club_member_info_cleaned SET full_name = initcap(full_name);
 ```
 
-After completing the above sql statement, continue with the sql statement below.
+#### Delete rows with duplicate emails
 
 ```sql
-UPDATE club_member_info_cleaned SET full_name = initcap(full_name);
+DELETE FROM club_member_info_cleaned WHERE id_member IN
+(
+SELECT cmic.id_member FROM club_member_info_cleaned cmic
+JOIN
+	(SELECT email, MIN(id_member) as min_id FROM club_member_info_cleaned 
+	 GROUP BY email) as sub
+ON cmic.email = sub.email
+WHERE cmic.id_member > sub.min_id
+)
 ```
