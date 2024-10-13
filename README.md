@@ -39,10 +39,27 @@ This is an educational project on data cleaning and preparation using SQL by Duy
 <img src="https://github.com/user-attachments/assets/a210ece0-d482-4e2d-bcda-67393830c6f3" width=705 height=400>
 
 ### An overview of the dataset
-First we need to display the first 10 records to get a quick look at the dataset by using following sql statement.
+
+**Step 1: once you have finished importing the data, switch to the data tab by clicking on it on the tab bar.**
+
+<img src="https://github.com/user-attachments/assets/ce8a1bfa-cff8-4918-8e0d-d80659c63669">
+
+**Step 2: ctrl+left click on the green highlighted table name to open the SQL console (next to the ![image](https://github.com/user-attachments/assets/2a9ccac1-1191-4474-b7e4-bd41e94eee62) icon).**
+
+<img src="https://github.com/user-attachments/assets/97ebf473-4667-4a7b-ac84-b44fb6ee1352" width=350 height=400>
+
+**Step 3: enter the sql statement as in the image and click the button ![image](https://github.com/user-attachments/assets/a88c21d6-3f67-4426-9e71-e0a82690177d)
+to see a quick look at the first 10 records of the "club_member_info" table.**
+
+<img src="https://github.com/user-attachments/assets/5f2f18bd-afcc-4ac0-8de7-dcfd77dfa986" width=350 height=400>
+<img src="https://github.com/user-attachments/assets/fc5d90be-d5a6-4c38-8044-2d598d5f1218" width=350 height=400>
+
+**SQL statement used in the above step:**
+
 ```sql
 SELECT * FROM club_member_info LIMIT 10
 ```
+
 **Results table:**
 
 |full_name|age|martial_status|email|phone|full_address|job_title|membership_date|
