@@ -92,7 +92,7 @@ SELECT * FROM club_member_info LIMIT 10
 <img src="https://github.com/user-attachments/assets/2b0d0c15-0557-4a09-8613-70f4433fee98" height=400 width=350>
 <img src="https://github.com/user-attachments/assets/f4b83888-dff3-4d0a-9793-e2c6a6109e0d">
 
-**Step 4: double-click on the newly created table to go to the information page of that table, point to the Data tab, do as steps 1 and 2 of "An overview of the dataset" to open the SQL console. Enter the SQL as shown in the image and press the "Run" button. Then refresh the "club_member_info_cleaned" table. In the data tab of the table, you can see the data has been inserted from the "club_member_info" table.**
+**Step 4: double-click on the newly created table to go to the information page of that table, point to the data tab, do as steps 1 and 2 of "An overview of the dataset" to open the SQL console. Enter the SQL as shown in the image and press the "Run" button. Then refresh the "club_member_info_cleaned" table. In the data tab of the table, you can see the data has been inserted from the "club_member_info" table.**
 
 <img src="https://github.com/user-attachments/assets/a962dba0-f9cf-4a68-98af-fa79d9a60772">
 <img src="https://github.com/user-attachments/assets/1f1a98d0-cb4f-415e-ae1e-33752b4d0a45" height=400 width=350>
@@ -104,7 +104,7 @@ SELECT * FROM club_member_info LIMIT 10
 -- Create table "club_member_info_cleaned"
 
 CREATE TABLE club_member_info_cleaned (
-    id_member INTEGER PRIMARY KEY AUTOINCREMENT,
+	id_member INTEGER PRIMARY KEY AUTOINCREMENT,
 	full_name VARCHAR(50),
 	age INTEGER,
 	martial_status VARCHAR(50),
@@ -120,7 +120,8 @@ CREATE TABLE club_member_info_cleaned (
 
 -- Copy all values from original table
 
-INSERT INTO club_member_info_cleaned (full_name, age, martial_status, email, phone, full_address, job_title, membership_date)  SELECT * FROM club_member_info
+INSERT INTO club_member_info_cleaned (full_name, age, martial_status, email,
+phone, full_address, job_title, membership_date) SELECT * FROM club_member_info
 ```
 
 ### Data cleaning
@@ -133,16 +134,17 @@ To clean the data in the "club_member_info_cleaned" table, execute the following
 UPDATE club_member_info_cleaned SET age = 42 WHERE age > 100
 ```
 
-#### Remove spaces at the beginning and end of each member's full name
+#### Remove spaces at the beginning and end of each member's fullname
 
 ```sql
 UPDATE club_member_info_cleaned SET full_name = TRIM(full_name)
 ```
 
-#### Normalize names in the fullname column (first character of first name and last name is capitalized, remaining characters are lowercase).
+#### Normalize names in the "full_name" column 
 
 ```sql
--- Create initcap() function
+/* Create initcap() function. This function converts the full names in the "full_name" column, the first
+characters in the full name and last name will be capitalized, the remaining characters will be lowercase. */
 
 CREATE TEMPORARY FUNCTION initcap(str) RETURNS STRING AS
 BEGIN
@@ -157,6 +159,7 @@ BEGIN
 END;
 
 -- After completing the above sql statement, continue with the sql statement below.
+
 UPDATE club_member_info_cleaned SET full_name = initcap(full_name);
 ```
 
