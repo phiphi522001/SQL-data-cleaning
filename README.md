@@ -30,7 +30,7 @@ This is an educational project on data cleaning and preparation using SQL by Duy
 
 <img src="https://github.com/user-attachments/assets/f1eed528-aed6-4c65-bd14-bb2b4d4dcad1" width=350 height=400>
 
-**Step 3: choose the dataset CSV file and click "Open", in the next 2 images click "Next". When "Proceed" button become active, click it and wait while importing will finish. In the last image, you have completed importing data from the CSV file into the database.**
+**Step 3: choose the dataset CSV file and click "Open", in the next 2 images click "Next". When "Proceed" button become active, click it and wait while importing will finish. In the last image, we're done, a new table "club_member_info" is created in the database.**
 
 <img src="https://github.com/user-attachments/assets/1b8bd484-8254-4639-8591-ae653ad5d8b0" width=350 height=400>
 <img src="https://github.com/user-attachments/assets/d4019cec-a5ed-4b11-9387-92552a74ec20" width=350 height=400>
@@ -51,8 +51,8 @@ This is an educational project on data cleaning and preparation using SQL by Duy
 **Step 3: enter the sql statement as in the image and click the button ![image](https://github.com/user-attachments/assets/a88c21d6-3f67-4426-9e71-e0a82690177d)
 to see a quick look at the first 10 records of the "club_member_info" table.**
 
-<img src="https://github.com/user-attachments/assets/5f2f18bd-afcc-4ac0-8de7-dcfd77dfa986" width=350 height=400>
-<img src="https://github.com/user-attachments/assets/fc5d90be-d5a6-4c38-8044-2d598d5f1218" width=350 height=400>
+<img src="https://github.com/user-attachments/assets/832c24dd-1270-4de9-94ff-d8f96b14593a" width=350 height=400>
+<img src="https://github.com/user-attachments/assets/460dbcbd-a21b-4e08-9033-ac225cd4a296" width=350 height=400>
 
 **SQL statement used in the above step:**
 
@@ -75,11 +75,36 @@ SELECT * FROM club_member_info LIMIT 10
 |mendie alexandrescu|46|single|malexandrescu8@state.gov|504-918-4753|34 Delladonna Terrace,New Orleans,Louisiana|Systems Administrator III|3/12/1921|
 | fey kloss|52|married|fkloss9@godaddy.com|808-177-0318|8976 Jackson Park,Honolulu,Hawaii|Chemical Engineer|11/5/2014|
 
-## Cleaning and documenting 
+## Cleaning and documenting
+
 ### Make a copy of table
 
+**Step 1: right click on the database name in the "Database Navigator" pane, select "SQL Editor → Open SQL console".**
+
+<img src="https://github.com/user-attachments/assets/3fc025dc-da86-4109-adaa-bb900e84f004" height=400 width=350>
+
+**Step 2: enter the SQL statement as shown in the image and click the "Run" button.**
+
+<img src="https://github.com/user-attachments/assets/f56699da-46d0-4cd3-b130-431a33089ab3" height=400 width=350>
+
+**Step 3: right click on the database name and click "Refresh" as shown below. A new table "club_member_info_cleaned" will be created.**
+
+<img src="https://github.com/user-attachments/assets/2b0d0c15-0557-4a09-8613-70f4433fee98" height=400 width=350>
+<img src="https://github.com/user-attachments/assets/f4b83888-dff3-4d0a-9793-e2c6a6109e0d">
+
+**Step 4: double-click on the newly created table to go to the information page of that table, point to the Data tab, do as steps 1 and 2 of "An overview of the dataset" to open the SQL console. Enter the SQL as shown in the image and press the "Run" button. Then refresh the "club_member_info_cleaned" table. In the data tab of the table, you can see the data has been inserted from the "club_member_info" table.**
+
+<img src="https://github.com/user-attachments/assets/a962dba0-f9cf-4a68-98af-fa79d9a60772">
+<img src="https://github.com/user-attachments/assets/1f1a98d0-cb4f-415e-ae1e-33752b4d0a45" height=400 width=350>
+<img src="https://github.com/user-attachments/assets/d97f53f0-fb80-4aee-bea8-e88d9eab8d55" height=400 width=350>
+
+**SQL statements used:**
+
 ```sql
+-- Create table "club_member_info_cleaned"
+
 CREATE TABLE club_member_info_cleaned (
+    id_member INTEGER PRIMARY KEY AUTOINCREMENT,
 	full_name VARCHAR(50),
 	age INTEGER,
 	martial_status VARCHAR(50),
@@ -90,13 +115,17 @@ CREATE TABLE club_member_info_cleaned (
 	membership_date VARCHAR(50)
 );
 ```
-Copy all values from original table
 
-```sql 
-INSERT INTO club_member_info_cleaned SELECT * FROM club_member_info
+```sql
+
+-- Copy all values from original table
+
+INSERT INTO club_member_info_cleaned (full_name, age, martial_status, email, phone, full_address, job_title, membership_date)  SELECT * FROM club_member_info
 ```
 
 ### Data cleaning
+
+To clean the data in the "club_member_info_cleaned" table, execute the following SQL statements in the database SQL console.
 
 #### Adjust age greater than 100 to average age
 
@@ -110,22 +139,26 @@ UPDATE club_member_info_cleaned SET age = 42 WHERE age > 100
 UPDATE club_member_info_cleaned SET full_name = TRIM(full_name)
 ```
 
-#### Capitalize all characters in the member's name
+#### Normalize names in the fullname column (first character of first name and last name is capitalized, remaining characters are lowercase).
 
 ```sql
-UPDATE club_member_info_cleaned SET full_name = UPPER(full_name)
+-- Create initcap() function
+
+CREATE TEMPORARY FUNCTION initcap(str) RETURNS STRING AS
+BEGIN
+  SELECT group_concat(upper(substr(word, 1, 1)) || substr(word, 2))
+  FROM (
+    SELECT trim(substr(str, instr(str, ' '), instr(str, ' ', instr(str, ' ')+1)-instr(str, ' '))) AS word
+    FROM (
+      SELECT ' ' || str || ' ' AS str
+    )
+  )
+  WHERE word != '';
+END;
 ```
 
-#### Delete rows with duplicate emails
+After completing the above sql statement, continue with the sql statement below.
 
 ```sql
-DELETE FROM club_member_info_cleaned WHERE rowid IN
-(
-SELECT cmic.rowid FROM club_member_info_cleaned cmic
-JOIN
-	(SELECT email, MIN(rowid) as min_id FROM club_member_info_cleaned 
-	 GROUP BY email) as sub
-ON cmic.email = sub.email
-WHERE cmic.rowid > sub.min_id
-)
+UPDATE club_member_info_cleaned SET full_name = initcap(full_name);
 ```
