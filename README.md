@@ -1,5 +1,4 @@
 # SQL data cleaning
-This is an educational project on data cleaning and preparation using SQL by Duy Phi. The original database in CSV format is located in the file club_member_info.csv. This project will use SQLite database and will be implemented in DBeaver. Here, we will explore the steps that need to be applied to obtain a cleansed version of the dataset.
 
 ## Prepare a SQLite database to work
 
